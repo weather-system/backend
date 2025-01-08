@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WeatherData;
+use Illuminate\Support\Facades\Log;
 
 class WeatherDataController extends Controller
 {
     public function store(Request $request)
     {
+        // Debug: Log semua request masuk
+        Log::info('Incoming Request Data:', $request->all());
+
         // Validasi input
-        $request->validate([
+        $validatedData = $request->validate([
             'kecepatan_angin' => 'required|numeric',
-            'arah_angin' => 'required|string',
+            'arah_angin' => 'required|string|max:255',
             'curah_hujan' => 'required|numeric',
             'suhu' => 'required|numeric',
             'kelembapan' => 'required|numeric',
