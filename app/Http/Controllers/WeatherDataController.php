@@ -34,4 +34,16 @@ class WeatherDataController extends Controller
             'data' => $data,
         ], 201);
     }
+
+    public function index()
+    {
+        // Ambil semua data cuaca dari database
+        $data = WeatherData::all();
+
+        // Kembalikan response berupa data dalam format JSON
+        return response()->json([
+            'message' => 'Data cuaca berhasil diambil.',
+            'data' => $data,
+        ], 200);
+    }
 }
